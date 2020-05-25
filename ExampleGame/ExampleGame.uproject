@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "./UE4",
+	"EngineAssociation": "../UE4",
 	"Category": "",
 	"Description": "",
 	"Modules": [
