@@ -23,3 +23,7 @@
 # Ignore pre-built UE4 folder
 
 /UE4
+
+# Ignore built games
+
+/BuiltGame
