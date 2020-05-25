@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "../UE4",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "ExampleGame",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
