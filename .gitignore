@@ -15,3 +15,7 @@
 /Intermediate
 /Saved
 
+# Ignore FetchPrebuiltUE4 files which should be per-user
+
+/FetchPrebuiltUE4/application-default-credentials.json
+/FetchPrebuiltUE4/InstalledUE4Version.json
