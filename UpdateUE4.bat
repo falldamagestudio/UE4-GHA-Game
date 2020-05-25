@@ -1,0 +1,1 @@
+@powershell -ExecutionPolicy Bypass .\UpdateUE4.ps1
