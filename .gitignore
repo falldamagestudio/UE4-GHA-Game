@@ -19,3 +19,7 @@
 
 /FetchPrebuiltUE4/application-default-credentials.json
 /FetchPrebuiltUE4/InstalledUE4Version.json
+
+# Ignore pre-built UE4 folder
+
+/UE4

@@ -1,0 +1,7 @@
+{
+	"ClientId" : "200075490744-jskhjq0g9hmulc2obfks2cgm799jconk.apps.googleusercontent.com",
+	"ClientSecret" : "jEgrqIkbusN1tONz0NcaPXUC",
+	"BlockStorageURI": "gs://ue4-build-system-example-longtail",
+	"VersionIndexStorageURI": "gs://ue4-build-system-example-longtail",
+	"UE4Folder" : "../UE4"
+}
