@@ -24,6 +24,10 @@
 
 /UE4
 
-# Ignore built games
+# Ignore built game
 
-/BuiltGame
+/LocallyBuiltGame
+
+# Ignore downloaded game
+
+/DownloadedGame
