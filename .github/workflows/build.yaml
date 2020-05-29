@@ -20,7 +20,16 @@ jobs:
     timeout-minutes: 120
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Setup credentials for cloud storage
+        run: echo $LONGTAIL_GCLOUD_CREDENTIALS > FetchPrebuiltUE4\application-default-credentials.json
+        env:
+          LONGTAIL_GCLOUD_CREDENTIALS: ${{ secrets.LONGTAIL_GCLOUD_CREDENTIALS }}
+
+      - name: Update UE4
+        run: .\UpdateUE4.bat
 
       - name: Build game (Win64)
         run: .\BuildGame.bat
