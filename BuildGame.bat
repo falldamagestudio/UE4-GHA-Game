@@ -4,5 +4,5 @@
 @set Target=ExampleGame
 @set ArchiveDir=BuiltGame
 
-@md %ArchiveDir%
+@if not exist %ArchiveDir% md %ArchiveDir%
 @powershell -ExecutionPolicy Bypass ". .\Scripts\Windows\Run-UAT.ps1; Run-UAT -UProjectLocation %ProjectLocation% -Arguments  ""-ScriptsForProject=$(Resolve-Path %ProjectLocation%)"" ""BuildCookRun"" ""-installed"" ""-nop4"" ""-project=$(Resolve-Path %ProjectLocation%)"" ""-cook"" ""-stage"" ""-archive"" ""-archivedirectory=$(Resolve-Path %ArchiveDir%)"" ""-package"" ""-pak"" ""-prereqs"" ""-nodebuginfo"" ""-targetplatform=%TargetPlatform%"" ""-build"" ""-target=%Target%"" ""-clientconfig=%Configuration%"" ""-utf8output"""
