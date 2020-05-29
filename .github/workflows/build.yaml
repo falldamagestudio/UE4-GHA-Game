@@ -1,0 +1,29 @@
+
+name: Build
+
+on:
+  push:
+    ## Always build when there are new commits to master
+    #branches:
+    #  - master
+
+    # Always build release-tags
+    tags:
+      - 'releases/**'
+
+jobs:
+  build-win64:
+    name: Build for Win64
+
+    runs-on: self-hosted
+
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build game (Win64)
+        run: .\BuildGame.bat
+
+      - name: Upload game as Game-${{ github.sha }}
+        run: .\UploadGame ${{ github.sha }}
