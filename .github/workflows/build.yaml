@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup credentials for cloud storage
-        run: echo $LONGTAIL_GCLOUD_CREDENTIALS > FetchPrebuiltUE4\application-default-credentials.json
+        run: echo $env:LONGTAIL_GCLOUD_CREDENTIALS > FetchPrebuiltUE4\application-default-credentials.json
         env:
           LONGTAIL_GCLOUD_CREDENTIALS: ${{ secrets.LONGTAIL_GCLOUD_CREDENTIALS }}
 
