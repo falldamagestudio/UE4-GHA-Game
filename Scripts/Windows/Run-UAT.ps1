@@ -14,5 +14,5 @@ function Run-UAT {
 	
 	$RunUATArguments = $Arguments | Where { $_ -ne $null }
 
-	Start-Process -FilePath $RunUATLocation -ArgumentList $RunUATArguments -NoNewWindow
+	Start-Process -FilePath $RunUATLocation -ArgumentList $RunUATArguments -NoNewWindow -Wait
 }

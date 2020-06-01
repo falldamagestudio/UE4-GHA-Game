@@ -14,5 +14,5 @@ function Run-Editor {
 	
 	$EditorArguments = @($UProjectLocation) + $Arguments | Where { $_ -ne $null }
 
-	Start-Process -FilePath $EditorLocation -ArgumentList $EditorArguments -NoNewWindow
+	Start-Process -FilePath $EditorLocation -ArgumentList $EditorArguments -NoNewWindow -Wait
 }
