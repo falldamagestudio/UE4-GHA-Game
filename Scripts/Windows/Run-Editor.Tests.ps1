@@ -6,7 +6,7 @@ Describe 'Run-Editor' {
 
 	It "Launches editor without additional arguments" {
 
-		Mock Start-Process { }
+		Mock Start-Process { return @{ ExitCode = 0 } }
 
 		Mock Get-EngineLocationForProject { "C:\UE_4.24" }
 
@@ -17,7 +17,7 @@ Describe 'Run-Editor' {
 
 	It "Launches editor with additional arguments" {
 
-		Mock Start-Process { }
+		Mock Start-Process { return @{ ExitCode = 0 } }
 
 		Mock Get-EngineLocationForProject { "C:\UE_4.24" }
 
@@ -25,4 +25,15 @@ Describe 'Run-Editor' {
 
 		Assert-MockCalled Start-Process -ParameterFilter { ($FilePath -eq "C:\UE_4.24\Engine\Binaries\Win64\UE4Editor.exe") -and ($ArgumentList.Length -eq 3) -and ($ArgumentList[0] -eq "default.uproject") -and ($ArgumentList[1] -eq "Hello") -and ($ArgumentList[2] -eq "World") }
 	}
+
+	It "Throws an exception when the editor returns an error" {
+
+		Mock Start-Process { return @{ ExitCode = 3 } }
+
+		Mock Get-EngineLocationForProject { "C:\UE_4.24" }
+
+		{ Run-Editor -UProjectLocation "default.uproject" } |
+			Should Throw "UE4Editor exited with code 3"
+	}
+
 }

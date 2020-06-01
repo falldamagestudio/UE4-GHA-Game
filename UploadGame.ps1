@@ -10,4 +10,5 @@ function UploadGame {
 
 	cd FetchPrebuiltUE4
 	& .\FetchPrebuiltUE4 upload-package "--folder" "$AbsoluteFolder" "--package" "Game-$Version"
+	if ($LASTEXITCODE -ne 0) { throw }
 }

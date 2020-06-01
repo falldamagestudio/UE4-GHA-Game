@@ -1,0 +1,40 @@
+
+name: Build
+
+on:
+  push:
+    ## Always build when there are new commits to master
+    #branches:
+    #  - master
+
+    # Always build release-tags
+    tags:
+      - 'releases/**'
+
+jobs:
+  build-win64:
+    name: Build for Win64
+
+    runs-on: self-hosted
+
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          clean: false
+
+      - name: Setup credentials for cloud storage
+        run: $env:LONGTAIL_GCLOUD_CREDENTIALS | Out-File FetchPrebuiltUE4\application-default-credentials.json -Encoding ASCII
+        env:
+          LONGTAIL_GCLOUD_CREDENTIALS: ${{ secrets.LONGTAIL_GCLOUD_CREDENTIALS }}
+
+      - name: Update UE4
+        run: .\UpdateUE4.bat
+
+      - name: Build game (Win64)
+        run: .\BuildGame.bat
+
+      - name: Upload game as Game-${{ github.sha }}
+        run: .\UploadGame ${{ github.sha }}

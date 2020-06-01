@@ -10,4 +10,5 @@ function DownloadGame {
 
 	cd FetchPrebuiltUE4
 	& .\FetchPrebuiltUE4 download-package "--folder" "$AbsoluteFolder" "--package" "Game-$Version"
+	if ($LASTEXITCODE -ne 0) { throw }
 }
