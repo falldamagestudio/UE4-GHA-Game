@@ -11,11 +11,11 @@ The [build script for the game](.github/workflows/build.yaml) is short and to th
 
 [GitHub Actions](https://github.com/falldamagestudio/UE4-GHA-Game/actions) shows build progress, and controls the worker VM.
 
+The original worker VM image is created using [a Packer script](https://github.com/falldamagestudio/UE4-GHA-BuildAgent).
+
 The Longtail store deduplicates data server-side -- so having lots of near-identical builds will not use a lot of space server-side. Also, downloading near-identical builds works like downloading patches in Steam.
 
 ## Major future developments
-
-It should be easier to create the agent VM. It needs a lot of commands today.
 
 It should be easier to build an UE4 version. In fact, there should probably be a separate project like this for building UE4 itself.
 
