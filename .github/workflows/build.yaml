@@ -13,9 +13,9 @@ on:
 
 jobs:
   build-win64:
-    name: Build for Win64
+    name: Build for Win64 [runs-on: build_agent]
 
-    runs-on: self-hosted
+    runs-on: build_agent
 
     timeout-minutes: 120
 
