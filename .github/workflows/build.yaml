@@ -16,7 +16,7 @@ jobs:
     name: "echo hello world, just to get started"
     runs-on: ubuntu-latest
     steps:
-      - run: echo hello
+      - run: echo hello && sleep 60 && echo world
 
   build-win64:
     name: "Build for Win64 [runs-on: build_agent]"
