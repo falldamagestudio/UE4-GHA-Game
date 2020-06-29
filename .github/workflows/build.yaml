@@ -19,7 +19,6 @@ jobs:
       - run: curl ${{ secrets.WATCHDOG_TRIGGER_URL }}
 
   build-win64:
-    needs: [ start-agents ]
     name: "Build for Win64"
 
     runs-on: build_agent
