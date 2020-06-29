@@ -12,14 +12,15 @@ on:
       - 'releases/**'
 
 jobs:
-  placeholder:
-    name: "echo hello world, just to get started"
+  start-agents:
+    name: "Start build agents"
     runs-on: ubuntu-latest
     steps:
-      - run: echo hello && sleep 60 && echo world
+      - run: curl ${{ secrets.WATCHDOG_TRIGGER_URL }}
 
   build-win64:
-    name: "Build for Win64 [runs-on: build_agent]"
+    needs: [ start-agents ]
+    name: "Build for Win64"
 
     runs-on: build_agent
 
@@ -44,3 +45,10 @@ jobs:
 
       - name: Upload game as Game-${{ github.sha }}
         run: .\UploadGame ${{ github.sha }}
+
+  stop-agents:
+    needs: [ build-win64 ]
+    name: "Stop build agents"
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl ${{ secrets.WATCHDOG_TRIGGER_URL }}
