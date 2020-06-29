@@ -3,9 +3,9 @@ name: Build
 
 on:
   push:
-    ## Always build when there are new commits to master
-    #branches:
-    #  - master
+    # Always build when there are new commits to master
+    branches:
+      - master
 
     # Always build release-tags
     tags:
