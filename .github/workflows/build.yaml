@@ -12,13 +12,24 @@ on:
       - 'releases/**'
 
 jobs:
+  avoid-concurrent-invocations:
+    timeout-minutes: 240
+    runs-on: ubuntu-latest
+    steps:
+      - name: Turnstyle
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   start-agents:
+    needs: [ avoid-concurrent-invocations ]
     name: "Start build agents"
     runs-on: ubuntu-latest
     steps:
       - run: curl ${{ secrets.WATCHDOG_TRIGGER_URL }}
 
   build-win64:
+    needs: [ avoid-concurrent-invocations ]
     name: "Build for Win64"
 
     runs-on: game_build_agent
