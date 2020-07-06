@@ -6,6 +6,6 @@ function Get-AutomationToolLogLocation {
 
 	$ApplicationDataLocation = [environment]::GetFolderPath("ApplicationData")
 	$MangledUE4Location = $UE4Location -replace "\\","+" -replace ":",""
-	$AutomationToolLogLocation = "${ApplicationDataLocation}\Roaming\Unreal Engine\AutomationTool\Logs\${MangledUE4Location}\Log.txt"
+	$AutomationToolLogLocation = "${ApplicationDataLocation}\Unreal Engine\AutomationTool\Logs\${MangledUE4Location}\Log.txt"
 	return $AutomationToolLogLocation
 }
