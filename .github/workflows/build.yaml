@@ -79,6 +79,7 @@ jobs:
   stop-agents:
     needs: [ build-win64 ]
     name: "Stop build agents"
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - run: curl ${{ secrets.WATCHDOG_TRIGGER_URL }}
