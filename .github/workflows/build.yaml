@@ -65,16 +65,16 @@ jobs:
         id: find_build_logs
         if: ${{ always() }}
         run: |
-          . .\Scripts\Windows\Get-AutomationToolLogLocation.ps1
-          $AutomationToolLogLocation = Get-AutomationToolLogLocation -UE4Location (Resolve-Path .\UE4)
-          Write-Host "::set-output name=automationtool_log_location::${AutomationToolLogLocation}"
+          . .\Scripts\Windows\Get-AutomationToolLogsLocation.ps1
+          $AutomationToolLogsLocation = Get-AutomationToolLogsLocation -UE4Location (Resolve-Path .\UE4)
+          Write-Host "::set-output name=automationtool_logs_location::${AutomationToolLogsLocation}"
 
       - name: upload build logs
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: automationtool-log
-          path: ${{ steps.find_build_logs.outputs.automationtool_log_location }}
+          name: automationtool-logs
+          path: ${{ steps.find_build_logs.outputs.automationtool_logs_location }}
 
   stop-agents:
     needs: [ build-win64 ]
