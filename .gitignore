@@ -31,3 +31,12 @@
 # Ignore downloaded game
 
 /DownloadedGame
+
+# Ignore UpdateUE4 files which should be per-user
+
+/UpdateUE4/service-account-credentials.json
+/UpdateUE4/installed_version.json
+
+# Ignore local Longtail cache
+
+/LongtailCache
