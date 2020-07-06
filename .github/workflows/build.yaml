@@ -61,6 +61,21 @@ jobs:
       - name: Upload game as game-${{ github.sha }}-win64
         run: .\UploadGame\UploadGame.ps1 game-${{ github.sha }}-win64
 
+      - name: find build logs
+        id: find_build_logs
+        if: ${{ always() }}
+        run: |
+          .\Scripts\Windows\Get-AutomationToolLogLocation.ps1
+          $AutomationToolLogLocation = Get-AutomationToolLogLocation -UE4Location (Resolve-Path .\UE4)
+          Write-Host "::set-output name=automationtool_log_location::${AutomationToolLogLocation}"
+
+      - name: upload build logs
+        if: ${{ always() }}
+        use: actions/upload-artifact@v2
+        with:
+          name: automationtool-log
+          path: ${{ steps.find_build_logs.outputs.automationtool_log_location }}
+
   stop-agents:
     needs: [ build-win64 ]
     name: "Stop build agents"
