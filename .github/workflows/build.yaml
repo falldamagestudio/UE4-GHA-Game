@@ -71,7 +71,7 @@ jobs:
 
       - name: upload build logs
         if: ${{ always() }}
-        use: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: automationtool-log
           path: ${{ steps.find_build_logs.outputs.automationtool_log_location }}
