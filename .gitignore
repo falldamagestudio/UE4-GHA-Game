@@ -37,6 +37,10 @@
 /UpdateUE4/service-account-credentials.json
 /UpdateUE4/installed_version.json
 
+# Ignore UploadGame files which should be per-user
+
+/UploadGame/service-account-credentials.json
+
 # Ignore local Longtail cache
 
 /LongtailCache
