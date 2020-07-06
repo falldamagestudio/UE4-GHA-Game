@@ -32,18 +32,23 @@ jobs:
           clean: false
 
       - name: Setup credentials for cloud storage
-        run: $env:LONGTAIL_GCLOUD_CREDENTIALS | Out-File FetchPrebuiltUE4\application-default-credentials.json -Encoding ASCII
+        run: $env:GCP_GAME_BUILD_AGENT_CREDENTIALS | Out-File UpdateUE4\service-account-credentials.json -Encoding ASCII
         env:
-          LONGTAIL_GCLOUD_CREDENTIALS: ${{ secrets.LONGTAIL_GCLOUD_CREDENTIALS }}
+          GCP_GAME_BUILD_AGENT_CREDENTIALS: ${{ secrets.GCP_GAME_BUILD_AGENT_CREDENTIALS }}
 
       - name: Update UE4
-        run: .\UpdateUE4.bat
+        run: .\UpdateUE4\UpdateUE4.ps1
 
       - name: Build game (Win64)
         run: .\BuildGame.bat
 
-      - name: Upload game as Game-${{ github.sha }}
-        run: .\UploadGame ${{ github.sha }}
+      - name: Setup credentials for cloud storage
+        run: $env:GCP_GAME_BUILD_AGENT_CREDENTIALS | Out-File UploadGame\service-account-credentials.json -Encoding ASCII
+        env:
+          GCP_GAME_BUILD_AGENT_CREDENTIALS: ${{ secrets.GCP_GAME_BUILD_AGENT_CREDENTIALS }}
+
+      - name: Upload game as game-${{ github.sha }}-win64
+        run: .\UploadGame\UploadGame.ps1 game-${{ github.sha }}-win64
 
   stop-agents:
     needs: [ build-win64 ]
