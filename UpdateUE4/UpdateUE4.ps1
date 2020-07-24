@@ -1,15 +1,15 @@
+param (
+    [Parameter(Mandatory)] [string] $CloudStorageBucket
+)
 
 . $PSScriptRoot\Downsync.ps1
 
 try {
 
-	$CredentialsFile = "${PSScriptRoot}\service-account-credentials.json"
+    $CredentialsFile = "${PSScriptRoot}\service-account-credentials.json"
 
     $LocalConfigurationLocation = "${PSScriptRoot}\local_configuration.json"
     $LocalConfiguration = Get-Content -Path $LocalConfigurationLocation | ConvertFrom-Json
-
-    $OnlineConfigurationLocation = "${PSScriptRoot}\online_configuration.json"
-    $OnlineConfiguration = Get-Content -Path $OnlineConfigurationLocation | ConvertFrom-Json
 
     $DesiredVersionLocation = "${PSScriptRoot}\desired_version.json"
     if (Test-Path $DesiredVersionLocation) {
@@ -37,8 +37,8 @@ try {
             New-Item $CacheLocation -ItemType Directory | Out-Null
         }
 
-        $VersionIndexURI = "$($OnlineConfiguration.version_index_uri)/$($DesiredVersion.version).lvi"
-        $StorageURI = $OnlineConfiguration.storage_uri
+        $VersionIndexURI = "gs://${CloudStorageBucket}/store/index/$($DesiredVersion.version).lvi"
+        $StorageURI = "gs://${CloudStorageBucket}/store"
         $CacheLocation = $CacheLocation
         $TargetPath = "\\?\$(Resolve-Path $UE4Location)"
 

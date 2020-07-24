@@ -48,7 +48,7 @@ jobs:
           GCP_GAME_BUILD_AGENT_CREDENTIALS: ${{ secrets.GCP_GAME_BUILD_AGENT_CREDENTIALS }}
 
       - name: Update UE4
-        run: .\UpdateUE4\UpdateUE4.ps1
+        run: .\UpdateUE4\UpdateUE4.ps1 -CloudStorageBucket ${{ secrets.ENGINE_STORAGE_BUCKET_NAME }}
 
       - name: Build game (Win64)
         run: .\BuildGame.bat
@@ -59,7 +59,7 @@ jobs:
           GCP_GAME_BUILD_AGENT_CREDENTIALS: ${{ secrets.GCP_GAME_BUILD_AGENT_CREDENTIALS }}
 
       - name: Upload game as game-${{ github.sha }}-win64
-        run: .\UploadGame\UploadGame.ps1 game-${{ github.sha }}-win64
+        run: .\UploadGame\UploadGame.ps1 -Version game-${{ github.sha }}-win64 -CloudStorageBucket ${{ secrets.GAME_STORAGE_BUCKET_NAME }}
 
       - name: find build logs
         id: find_build_logs
