@@ -19,6 +19,10 @@ The VM is only running when a build is in progress. Therefore, it only incurs vC
 
 The Longtail store deduplicates data server-side -- so having lots of near-identical builds will not use a lot of space server-side. Also, downloading near-identical builds works like downloading patches in Steam.
 
+## Repository name constraints
+
+If you clone this to your own repository, you must pick a short name. GitHub Actions + the repo structure will place UE4 at `C:\A\_work\<reponame>\<reponame>\UE4` on the runner machine - and this path must be less than 50 characters long.
+
 # License
 
 The license for this example game is available in [LICENSE.txt](LICENSE.txt). See [golongtail](https://github.com/DanEngelbrecht/golongtail) and [FetchPrebuiltUE4](https://github.com/falldamagestudio/FetchPrebuiltUE4) for licenses of the software it depends on.
