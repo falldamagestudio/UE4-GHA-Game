@@ -2,6 +2,9 @@
 name: Build
 
 on:
+  # Allow users to trigger workflow manually via GitHub UI
+  workflow_dispatch:
+
   push:
     # Always build when there are new commits to master
     branches:
