@@ -42,9 +42,15 @@ try {
         $CacheLocation = $CacheLocation
         $TargetPath = "\\?\$(Resolve-Path $UE4Location)"
 
+        Write-Host "Removing old UE4 version..."
+
+        Remove-Item -Path $TargetPath -Recurse -Force -ErrorAction Stop
+
+        Write-Host "Updating to UE4 version $($DesiredVersion.version)... this will take 10-30 minutes..."
+
         Downsync -VersionIndexURI $VersionIndexURI -StorageURI $StorageURI -CacheLocation $CacheLocation -TargetPath $TargetPath -CredentialsFile $CredentialsFile
 
-        Write-Host "Updated to UE4 version $($DesiredVersion.version)"
+        Write-Host "Done."
 
         $DesiredVersion | ConvertTo-Json | Out-File -FilePath $InstalledVersionLocation
 
